@@ -41,4 +41,7 @@ def on_disconnect():
         print(f"{user['username']} disconnected from room {user['room']}")
 
 if __name__ == "__main__":
-    socketio.run(app, debug=True)
+    import eventlet
+    import eventlet.wsgi
+    # Запуск через eventlet WSGI сервер
+    eventlet.wsgi.server(eventlet.listen(('', 5000)), app)

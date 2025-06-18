@@ -1,4 +1,4 @@
-let socket = io();
+let socket = io("https://callingmessenger-sip.up.railway.app/");
 let room = null;
 let username = null;
 let pc = null;

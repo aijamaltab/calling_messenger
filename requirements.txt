@@ -1,3 +1,6 @@
-flask
+Flask
 flask-socketio
 eventlet
+
+werkzeug
+gunicorn

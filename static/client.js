@@ -1,4 +1,5 @@
-let socket = io("https://callingmessenger-sip.up.railway.app");
+let socket = io("https://callingmessenger-sip.up.railway.app", { path: '/socket.io' });
+
 let room = null;
 let username = null;
 let pc = null;

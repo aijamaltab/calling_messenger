@@ -1,5 +1,4 @@
-let socket = io("https://callingmessenger-sip.up.railway.app", { path: '/socket.io' });
-
+let socket = io();
 let room = null;
 let username = null;
 let pc = null;
@@ -54,7 +53,6 @@ socket.on("signal", async (data) => {
 async function setupMedia() {
   const stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
   localVideo.srcObject = stream;
-
 }
 
 async function startCall() {
@@ -70,7 +68,6 @@ async function startCall() {
 }
 
 async function createPeerConnection() {
-  console.log("Создаём RTCPeerConnection");
   pc = new RTCPeerConnection(config);
 
   pc.onicecandidate = (event) => {
@@ -80,20 +77,14 @@ async function createPeerConnection() {
   };
 
   pc.ontrack = (event) => {
-    console.log("Получен удалённый поток");
     remoteVideo.srcObject = event.streams[0];
   };
 
   const stream = localVideo.srcObject;
-  if (!stream) {
-    console.warn("localVideo.srcObject пуст, не можем добавить треки");
-    return;
-  }
   stream.getTracks().forEach((track) => {
     pc.addTrack(track, stream);
   });
 }
-
 
 // ---- Чат ----
 
